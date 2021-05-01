@@ -4,7 +4,7 @@ import io from "socket.io-client";
 
 import "./style.css";
 
-const socket = io(window.location.hostname);
+const socket = io("https://collaborative-whiteboard.herokuapp.com/");
 
 const Board = () => {
   const [mouseDown, setMouseDown] = useState(false);
