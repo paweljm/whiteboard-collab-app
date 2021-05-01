@@ -23,11 +23,11 @@ const Board = () => {
     };
     canvas.onmouseup = (e) => {
       setMouseDown(false);
-      ctx.closePath();
       socket.emit("up", { x: mousePos[0], y: mousePos[1] });
     };
-    socket.on("ondown", ({ x, y }) => {
+    socket.on("onDown", ({ x, y }) => {
       ctx.moveTo(x, y);
+      console.log("onDown");
     });
     socket.on("onDraw", ({ x, y }) => {
       ctx.lineTo(x, y);
