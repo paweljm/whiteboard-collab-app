@@ -1,7 +1,7 @@
 let path = require("path");
 let express = require("express");
 let app = require("express")();
-let httpServer = require("http").createServer(app);
+let httpServer = require("https").createServer(app);
 let io = require("socket.io")(httpServer, {
   cors: {
     origin: "*",
