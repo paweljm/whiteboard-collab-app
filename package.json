@@ -1,3 +1,26 @@
-{"scripts":{
-  "start":"node server.js"
-}}
+{
+  "name": "whiteboard-app",
+  "version": "1.0.0",
+  "description": "collaborative whiteboard app created with socket io and react",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "socket.io": "^4.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paweljm/whiteboard-collab-app.git"
+  },
+  "author": "Pawel Marcinkiewicz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paweljm/whiteboard-collab-app/issues"
+  },
+  "homepage": "https://github.com/paweljm/whiteboard-collab-app#readme"
+}
