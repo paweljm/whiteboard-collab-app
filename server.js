@@ -12,11 +12,11 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/whiteboard/build"));
 }
 
-app.use(express.static(path.join(__dirname, "../frontend/whiteboard/build")));
+app.use(express.static(path.join(__dirname, "./frontend/whiteboard/build")));
 
 app.get("/*", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "../frontend/whiteboard/build", "index.html")
+    path.join(__dirname, "./frontend/whiteboard/build", "index.html")
   );
 });
 
@@ -54,5 +54,5 @@ io.on("connection", (socket) => {
   });
 });
 
-let PORT = process.env.PORT || 8080;
+let PORT = process.env.PORT || 5000;
 httpServer.listen(PORT, () => console.log(`server started on port ${PORT}`));

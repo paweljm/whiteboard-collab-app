@@ -1,20 +1,3 @@
-{
-  "name": "whiteboard-app",
-  "version": "1.0.0",
-  "description": "fullstack collaborative whiteboard app made with react and socket io",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm --prefix ./backend run start"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/paweljm/whiteboard-collab-app.git"
-  },
-  "author": "Pawel Marcinkiewicz",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/paweljm/whiteboard-collab-app/issues"
-  },
-  "homepage": "https://github.com/paweljm/whiteboard-collab-app#readme"
-}
+{"scripts":{
+  "start":"node server.js"
+}}
