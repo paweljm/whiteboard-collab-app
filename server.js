@@ -11,6 +11,8 @@ let io = require("socket.io")(httpServer, {
   },
 });
 
+app.enable(`trust-proxy`);
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/whiteboard/build"));
 }
