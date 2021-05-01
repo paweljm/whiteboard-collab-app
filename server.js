@@ -54,5 +54,5 @@ io.on("connection", (socket) => {
   });
 });
 
-let PORT = process.env.PORT || 5000;
+let PORT = process.env.PORT || 8080;
 httpServer.listen(PORT, () => console.log(`server started on port ${PORT}`));
