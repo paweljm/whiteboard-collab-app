@@ -6,6 +6,10 @@ let io = require("socket.io")(httpServer, {
   },
 });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/whiteboard/build"));
+}
+
 let connections = [];
 
 io.on("connection", (socket) => {
@@ -26,10 +30,10 @@ io.on("connection", (socket) => {
       }
     });
   });
-  socket.on("up", (data) => {
+  socket.on("color", (data) => {
     connections.forEach((con) => {
       if (con.id !== socket.id) {
-        con.emit("onUp", { x: data.x, y: data.y });
+        con.emit("onColorSet", { color: "" });
       }
     });
   });
