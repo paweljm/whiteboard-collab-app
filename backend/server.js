@@ -1,3 +1,5 @@
+let path = require("path");
+let express = require("express");
 let app = require("express")();
 let httpServer = require("http").createServer(app);
 let io = require("socket.io")(httpServer, {
@@ -9,6 +11,14 @@ let io = require("socket.io")(httpServer, {
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/whiteboard/build"));
 }
+
+app.use(express.static(path.join(__dirname, "../frontend/whiteboard/build")));
+
+app.get("/*", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "../frontend/whiteboard/build", "index.html")
+  );
+});
 
 let connections = [];
 
