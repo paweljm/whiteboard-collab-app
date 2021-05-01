@@ -4,7 +4,7 @@ import io from "socket.io-client";
 
 import "./style.css";
 
-const socket = io();
+const socket = io(window.location.hostname);
 
 const Board = () => {
   const [mouseDown, setMouseDown] = useState(false);
