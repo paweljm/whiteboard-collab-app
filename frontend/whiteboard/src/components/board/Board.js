@@ -1,7 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import io from "socket.io-client";
 
 import "./style.css";
+
+const socket = io.connect("http://localhost:8080");
 
 const Board = () => {
   const [mouseDown, setMouseDown] = useState(false);
@@ -16,11 +19,20 @@ const Board = () => {
     canvas.onmousedown = (e) => {
       setMouseDown(true);
       ctx.beginPath();
+      socket.emit("down", { x: mousePos[0], y: mousePos[1] });
     };
     canvas.onmouseup = (e) => {
       setMouseDown(false);
       ctx.closePath();
+      socket.emit("up", { x: mousePos[0], y: mousePos[1] });
     };
+    socket.on("ondown", ({ x, y }) => {
+      ctx.moveTo(x, y);
+    });
+    socket.on("onDraw", ({ x, y }) => {
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    });
     canvas.onmousemove = (e) => {
       let rect = canvas.getBoundingClientRect();
       setMousePos([
@@ -29,8 +41,8 @@ const Board = () => {
       ]);
 
       if (mouseDown) {
+        socket.emit("draw", { x: mousePos[0], y: mousePos[1] });
         ctx.lineTo(mousePos[0], mousePos[1]);
-
         ctx.stroke();
       } else {
       }
