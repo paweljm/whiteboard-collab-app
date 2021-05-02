@@ -1,9 +1,14 @@
 import React from "react";
+import { useState } from "react";
 import Board from "../board/Board";
 
 import "./style.css";
 
 function Container() {
+  const [color, setColor] = useState("#fffff");
+  function handleChange(event) {
+    setColor(event.target.value);
+  }
   return (
     <div className="has-background-link">
       <nav className="navbar has-background-link has-text-left has-text-white">
@@ -12,11 +17,16 @@ function Container() {
       </nav>
       <div className="columns">
         <div className="column is-three-quarters">
-          <Board></Board>
+          <Board color={color} />
         </div>
         <div className="column is-2 m-3 box has-text-centered">
           <h2>Color</h2>
-          <input type="color" className="input"></input>
+          <input
+            type="color"
+            onChange={handleChange}
+            value={color}
+            className="input"
+          ></input>
           <br />
           <br />
           <button className="button is-danger is-outlined">Clear Board</button>
