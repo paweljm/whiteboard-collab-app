@@ -1,5 +1,6 @@
 let path = require("path");
 let express = require("express");
+const { emit } = require("process");
 let app = require("express")();
 let httpServer = require("http").createServer(
   { requestCert: false, rejectUnauthorized: false },
@@ -48,8 +49,14 @@ io.on("connection", (socket) => {
   socket.on("color", (data) => {
     connections.forEach((con) => {
       if (con.id !== socket.id) {
-        con.emit("onColorSet", { color: "" });
+        con.emit("onColorSet", { color: data.color });
       }
+    });
+  });
+
+  socket.on("clear", () => {
+    connections.forEach((con) => {
+      con.emit("onClear", {});
     });
   });
 

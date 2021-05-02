@@ -1,10 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import io from "socket.io-client";
+import socket from "../socket";
 
 import "./style.css";
-
-const socket = io();
 
 const Board = ({ color }) => {
   const [mouseDown, setMouseDown] = useState(false);
@@ -16,7 +14,9 @@ const Board = ({ color }) => {
     ctx.strokeStyle = color;
     ctx.lineJoin = "round";
     ctx.lineWidth = 2;
-
+    socket.on("onClear", () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
     canvas.onmousedown = (e) => {
       setMouseDown(true);
       ctx.beginPath();
@@ -27,7 +27,7 @@ const Board = ({ color }) => {
       socket.emit("up", { x: mousePos[0], y: mousePos[1] });
     };
     socket.on("onDown", ({ x, y }) => {
-      ctx.moveTo(x, y);
+      ctx.beginPath();
       console.log("onDown");
     });
     socket.on("onDraw", ({ x, y }) => {

@@ -2,12 +2,21 @@ import React from "react";
 import { useState } from "react";
 import Board from "../board/Board";
 
+import socket from "../socket";
+
 import "./style.css";
 
 function Container() {
   const [color, setColor] = useState("#fffff");
   function handleChange(event) {
+    socket.emit("color", { color: color });
     setColor(event.target.value);
+  }
+  socket.on("onColorSet", ({ color }) => {
+    setColor(color);
+  });
+  function clearBoard() {
+    socket.emit("clear", {});
   }
   return (
     <div className="has-background-link">
@@ -29,7 +38,24 @@ function Container() {
           ></input>
           <br />
           <br />
-          <button className="button is-danger is-outlined">Clear Board</button>
+          <button className="button is-danger is-outlined" onClick={clearBoard}>
+            Clear Board
+          </button>
+          <br />
+          <br />
+          <p>Draw with your mouse on the board.</p>
+          <p>
+            Invite your peers and anything you draw will be updated on one
+            another's screens in real time
+          </p>
+          <p>
+            <br />
+            <br />
+            <em>
+              Color change and canvas affect all apps globally so that you and
+              your peers are always on the same page
+            </em>
+          </p>
         </div>
       </div>
       <footer className="footer has-background-link ">
