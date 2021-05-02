@@ -49,7 +49,7 @@ const Board = () => {
     };
   });
 
-  return <canvas id="board" className="board"></canvas>;
+  return <canvas id="board" className="box"></canvas>;
 };
 
 export default Board;
